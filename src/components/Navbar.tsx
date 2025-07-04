@@ -13,7 +13,7 @@ const Navbar = () => {
                                 <BookIcon />
                             </div>
                             <span className="text-xl font-bold uppercase tracking-tight text-primary-500">
-                                Coder&apos;s Book
+                                Coder&apos;s Library
                             </span>
                         </div>
                     </Link>
