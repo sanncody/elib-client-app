@@ -1,21 +1,17 @@
 import Banner from "@/app/(home)/components/Banner";
 import BookList from "./components/BookList";
+import { Suspense } from "react";
+import Loading from "@/components/Loading";
 
 
 export default async function Home() {
-  // server component : Can create a component as async in server component
-  // data fetching: We use 'fetch' for fetching data from backend
-  const response = await fetch(`${process.env.BACKEND_URL}/books`);
-  console.log(response.ok);
-  if (!response.ok) {
-    throw new Error("An error occurred while fetching the books");
-  }
-
-  const books = await response.json();
   return (
     <>
       <Banner />
-      <BookList books={books} />
+      <Suspense fallback={<Loading />}>
+        {/* To avoid unnecessary delay for other components due to data fetching for one component, we use component streaming inside that component only */}
+        <BookList />
+      </Suspense>
     </>
   );
 }
